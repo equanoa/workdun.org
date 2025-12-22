@@ -48,8 +48,10 @@ export const HeroDesignAli = () => {
         <div className="mb-6 mt-10 sm:justify-center md:mb-4 md:mt-40">
           <div className="relative flex items-center rounded-full border bg-popover px-3 py-1 text-xs text-primary/60">
             Scale. Grow. Dominate.
-            <Link
-              to="/pricing"
+            <a
+              href="https://app.workdun.org"
+              target="_blank"
+              rel="noopener noreferrer"
               className="ml-1 flex items-center font-semibold"
             >
               <div
@@ -57,7 +59,7 @@ export const HeroDesignAli = () => {
                 aria-hidden="true"
               />
               Get Started <span aria-hidden="true"></span>
-            </Link>
+            </a>
           </div>
         </div>
 

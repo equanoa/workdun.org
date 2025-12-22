@@ -56,17 +56,17 @@ const PostProcessing = ({
     const uScanProgress = uniform(0);
     progressRef.current = uScanProgress;
 
-    // Create a blue overlay that follows the scan line
+    // Create a neutral overlay that follows the scan line
     const scanPos = float(uScanProgress.value);
     const uvY = uv().y;
     const scanWidth = float(0.05);
     const scanLine = smoothstep(0, scanWidth, abs(uvY.sub(scanPos)));
-    const blueOverlay = vec3(0, 0.08, 0.25).mul(oneMinus(scanLine)).mul(0.3);
+    const neutralOverlay = vec3(0.5, 0.5, 0.5).mul(oneMinus(scanLine)).mul(0.1);
 
-    // Mix the original scene with the blue overlay
+    // Mix the original scene with the neutral overlay
     const withScanEffect = mix(
       scenePassColor,
-      add(scenePassColor, blueOverlay),
+      add(scenePassColor, neutralOverlay),
       fullScreenEffect ? smoothstep(0.9, 1.0, oneMinus(scanLine)) : 1.0
     );
 
@@ -121,6 +121,8 @@ const Scene = () => {
 
   const meshRef = useRef<Mesh>(null);
   const [visible, setVisible] = useState(false);
+  const { viewport } = useThree();
+  const mousePosition = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
     // Показываем изображение после загрузки текстур
@@ -128,6 +130,19 @@ const Scene = () => {
       setVisible(true);
     }
   }, [rawMap, depthMap]);
+
+  useEffect(() => {
+    const handleMouseMove = (event: MouseEvent) => {
+      // Normalize mouse position to -1 to 1 range based on viewport
+      mousePosition.current.x = (event.clientX / window.innerWidth) * 2 - 1;
+      mousePosition.current.y = -(event.clientY / window.innerHeight) * 2 + 1;
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, []);
 
   const { material, uniforms } = useMemo(() => {
     const uPointer = uniform(new THREE.Vector2(0));
@@ -157,7 +172,7 @@ const Scene = () => {
 
     const flow = oneMinus(smoothstep(0, 0.02, abs(depth.sub(uProgress))));
 
-    const mask = dot.mul(flow).mul(vec3(0, 0.2, 0.5));
+    const mask = dot.mul(flow).mul(vec3(0.5, 0.5, 0.5));
 
     const final = blendScreen(tMap, mask);
 
@@ -193,13 +208,18 @@ const Scene = () => {
     }
   });
 
-  useFrame(({ pointer }) => {
-    uniforms.uPointer.value = pointer;
+  useFrame(() => {
+    // Use global mouse position instead of Canvas-scoped pointer
+    // Normalize to -1 to 1 range (matching Three.js pointer behavior)
+    uniforms.uPointer.value.set(
+      mousePosition.current.x,
+      mousePosition.current.y
+    );
     
     // Add 3D rotation based on cursor position
     if (meshRef.current) {
-      const rotationX = pointer.y * 0.3; // Increased from subtle to more noticeable
-      const rotationY = pointer.x * 0.3; // Increased from subtle to more noticeable
+      const rotationX = mousePosition.current.y * 0.3; // Increased from subtle to more noticeable
+      const rotationY = mousePosition.current.x * 0.3; // Increased from subtle to more noticeable
       
       meshRef.current.rotation.x = THREE.MathUtils.lerp(
         meshRef.current.rotation.x,
