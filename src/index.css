@@ -1,0 +1,424 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --card: 0 0% 100%;
+    --ring: 221 83% 53%;
+    --input: 0 0% 89%;
+    --muted: 0 0% 96%;
+    --accent: 0 0% 96%;
+    --border: 0 0% 89%;
+    --radius: 0.5rem;
+    --chart-1: 221 83% 53%;
+    --chart-2: 210 20% 25%;
+    --chart-3: 210 15% 35%;
+    --chart-4: 210 20% 45%;
+    --chart-5: 210 15% 50%;
+    --popover: 0 0% 100%;
+    --primary: 221 83% 53%;
+    --sidebar: 0 0% 98%;
+    --secondary: 210 20% 25%;
+    --background: 0 0% 100%;
+    --foreground: 222 47% 11%;
+    --destructive: 0 84% 60%;
+    --sidebar-ring: 0 0% 63%;
+    --sidebar-accent: 0 0% 96%;
+    --sidebar-border: 0 0% 89%;
+    --card-foreground: 222 47% 11%;
+    --sidebar-primary: 221 83% 53%;
+    --muted-foreground: 0 0% 40%;
+    --accent-foreground: 222 47% 11%;
+    --popover-foreground: 222 47% 11%;
+    --primary-foreground: 0 0% 100%;
+    --sidebar-foreground: 222 47% 11%;
+    --secondary-foreground: 0 0% 100%;
+    --destructive-foreground: 0 0% 100%;
+    --sidebar-accent-foreground: 222 47% 11%;
+    --sidebar-primary-foreground: 0 0% 100%;
+  }
+
+  .dark {
+    --card: 222 47% 11%;
+    --ring: 213 27% 84%;
+    --input: 217 33% 17%;
+    --muted: 217 33% 17%;
+    --accent: 217 33% 17%;
+    --border: 217 33% 17%;
+    --radius: 0.5rem;
+    --chart-1: 213 27% 84%;
+    --chart-2: 210 20% 35%;
+    --chart-3: 210 15% 45%;
+    --chart-4: 210 20% 55%;
+    --chart-5: 210 15% 60%;
+    --popover: 222 47% 11%;
+    --primary: 213 27% 84%;
+    --sidebar: 222 47% 11%;
+    --secondary: 210 20% 35%;
+    --background: 222 47% 11%;
+    --foreground: 213 27% 84%;
+    --destructive: 0 63% 31%;
+    --sidebar-ring: 217 33% 17%;
+    --sidebar-accent: 217 33% 17%;
+    --sidebar-border: 217 33% 17%;
+    --card-foreground: 213 27% 84%;
+    --sidebar-primary: 213 27% 84%;
+    --muted-foreground: 215 20% 65%;
+    --accent-foreground: 213 27% 84%;
+    --popover-foreground: 213 27% 84%;
+    --primary-foreground: 222 47% 11%;
+    --sidebar-foreground: 213 27% 84%;
+    --secondary-foreground: 0 0% 100%;
+    --destructive-foreground: 0 0% 100%;
+    --sidebar-accent-foreground: 213 27% 84%;
+    --sidebar-primary-foreground: 0 0% 100%;
+  }
+}
+
+@theme inline {
+  --color-card: var(--card);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-border: var(--border);
+  --color-radius: var(--radius);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-popover: var(--popover);
+  --color-primary: var(--primary);
+  --color-sidebar: var(--sidebar);
+  --color-secondary: var(--secondary);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-destructive: var(--destructive);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-card-foreground: var(--card-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    overflow-x: hidden;
+    padding-bottom: 100px;
+  }
+}
+
+/* Body padding for sticky CTA - outside layer to allow media queries */
+@media (min-width: 640px) {
+  body {
+    padding-bottom: 120px;
+  }
+}
+
+@layer utilities {
+  /* Gradient animation */
+  @keyframes gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  .animate-gradient {
+    background-size: 200% auto;
+    animation: gradient 3s linear infinite;
+  }
+
+  /* Testimonial Carousel Animations */
+  @keyframes slideLeft {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes slideRight {
+    0% {
+      transform: translateX(-50%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  .carousel-slide-left {
+    animation: slideLeft 50s linear infinite;
+  }
+
+  .carousel-slide-right {
+    animation: slideRight 55s linear infinite;
+  }
+
+  /* Fade in animation for title words */
+  .fade-in {
+    animation: fadeIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    opacity: 0;
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Fade in animation for subtitle */
+  .fade-in-subtitle {
+    animation: fadeInSubtitle 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    opacity: 0;
+  }
+
+  @keyframes fadeInSubtitle {
+    0% {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    100% {
+      opacity: 0.9;
+      transform: translateY(0);
+    }
+  }
+
+  /* Explore button styles */
+  .explore-btn {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 24px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    animation: fadeInButton 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    transition: all 0.3s ease;
+    z-index: 100;
+  }
+
+  .explore-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateX(-50%) translateY(-2px);
+  }
+
+  @keyframes fadeInButton {
+    0% {
+      opacity: 0;
+      transform: translateX(-50%) translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+  }
+
+  .explore-arrow {
+    display: inline-flex;
+    animation: bounceArrow 2s ease-in-out infinite;
+  }
+
+  @keyframes bounceArrow {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(4px);
+    }
+  }
+
+  .arrow-svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  /* CPU Architecture Animations */
+  .cpu-architecture {
+    offset-anchor: 10px 0px;
+    animation: animation-path;
+    animation-iteration-count: infinite;
+    animation-timing-function: cubic-bezier(0.75, -0.01, 0, 0.99);
+  }
+
+  .cpu-line-1 {
+    offset-path: path("M 10 20 h 79.5 q 5 0 5 5 v 30");
+    animation-duration: 5s;
+    animation-delay: 1s;
+  }
+
+  .cpu-line-2 {
+    offset-path: path("M 180 10 h -69.7 q -5 0 -5 5 v 40");
+    animation-delay: 6s;
+    animation-duration: 2s;
+  }
+
+  .cpu-line-3 {
+    offset-path: path("M 130 20 v 21.8 q 0 5 -5 5 h -25");
+    animation-delay: 4s;
+    animation-duration: 6s;
+  }
+
+  .cpu-line-4 {
+    offset-path: path("M 170 80 v -21.8 q 0 -5 -5 -5 h -65");
+    animation-delay: 3s;
+    animation-duration: 3s;
+  }
+
+  .cpu-line-5 {
+    offset-path: path(
+      "M 135 65 h 15 q 5 0 5 5 v 10 q 0 5 -5 5 h -39.8 q -5 0 -5 -5 v -35"
+    );
+    animation-delay: 9s;
+    animation-duration: 4s;
+  }
+
+  .cpu-line-6 {
+    offset-path: path("M 94.8 95 v -46");
+    animation-delay: 3s;
+    animation-duration: 7s;
+  }
+
+  .cpu-line-7 {
+    offset-path: path(
+      "M 88 88 v -15 q 0 -5 -5 -5 h -10 q -5 0 -5 -5 v -5 q 0 -5 5 -5 h 28"
+    );
+    animation-delay: 4s;
+    animation-duration: 4s;
+  }
+
+  .cpu-line-8 {
+    offset-path: path("M 30 30 h 25 q 5 0 5 5 v 6.5 q 0 5 5 5 h 35");
+    animation-delay: 3s;
+    animation-duration: 3s;
+  }
+
+  @keyframes animation-path {
+    0% {
+      offset-distance: 0%;
+    }
+    100% {
+      offset-distance: 100%;
+    }
+  }
+
+  /* Shine Border Animation */
+  @keyframes shine-pulse {
+    0% {
+      background-position: 0% 0%;
+    }
+    100% {
+      background-position: -200% -200%;
+    }
+  }
+
+  .bg-shine-size {
+    background-size: 200% 200%;
+  }
+
+  /* Zoomable Image Styles */
+  .image-rendering-high-quality {
+    image-rendering: high-quality;
+  }
+}
+
+@layer components {
+  [data-rmiz] {
+    @apply block relative;
+  }
+  
+  [data-rmiz-ghost] {
+    @apply pointer-events-none absolute;
+  }
+  
+  [data-rmiz-btn-zoom],
+  [data-rmiz-btn-unzoom] {
+    @apply hidden;
+  }
+  
+  [data-rmiz-modal][open] {
+    @apply fixed inset-0 w-screen h-screen m-0 p-0 overflow-hidden;
+    @apply max-w-none max-h-none bg-transparent;
+  }
+  
+  [data-rmiz-modal-overlay] {
+    @apply absolute inset-0 transition-colors;
+  }
+  
+  [data-rmiz-modal-img] {
+    @apply absolute transform-gpu transition-transform duration-300;
+    transform-origin: 0 0;
+  }
+  
+  [data-rmiz-content="found"] img {
+    @apply cursor-zoom-in;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-rmiz-modal-overlay],
+  [data-rmiz-modal-img] {
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Radix NavigationMenu positioning fix */
+[data-radix-navigation-menu-viewport] {
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: var(--radix-navigation-menu-viewport-width) !important;
+  transform: var(--radix-navigation-menu-viewport-transform) !important;
+}
+
+[data-radix-navigation-menu-content] {
+  position: absolute !important;
+  left: 0 !important;
+  top: 0 !important;
+}
+
