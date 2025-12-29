@@ -2,7 +2,7 @@
 
 import React from "react"
 import { Link } from "react-router-dom"
-import { Mail, Phone, MapPin, Facebook, Instagram, Twitter, Linkedin, Globe } from "lucide-react"
+import { Mail, Phone, MapPin } from "lucide-react"
 import { FooterBackgroundGradient } from "@/components/ui/hover-footer"
 import { TextHoverEffect } from "@/components/ui/hover-footer"
 import { createSlug } from "@/lib/utils"
@@ -122,14 +122,6 @@ const contactInfo = [
   },
 ]
 
-// Social media icons
-const socialLinks = [
-  { icon: <Facebook size={20} />, label: "Facebook", href: "#" },
-  { icon: <Instagram size={20} />, label: "Instagram", href: "#" },
-  { icon: <Twitter size={20} />, label: "Twitter", href: "#" },
-  { icon: <Linkedin size={20} />, label: "LinkedIn", href: "#" },
-  { icon: <Globe size={20} />, label: "Globe", href: "#" },
-]
 
 export function Footer() {
   return (
@@ -227,23 +219,9 @@ export function Footer() {
         <hr className="border-t border-border my-8" />
 
         {/* Footer bottom */}
-        <div className="flex flex-col md:flex-row justify-between items-center text-sm space-y-4 md:space-y-0">
-          {/* Social icons */}
-          <div className="flex space-x-6 text-muted-foreground">
-            {socialLinks.map(({ icon, label, href }) => (
-              <a
-                key={label}
-                href={href}
-                aria-label={label}
-                className="hover:text-primary transition-colors"
-              >
-                {icon}
-              </a>
-            ))}
-          </div>
-
+        <div className="flex flex-col md:flex-row justify-center items-center text-sm space-y-4 md:space-y-0">
           {/* Copyright */}
-          <p className="text-center md:text-left text-muted-foreground">
+          <p className="text-center text-muted-foreground">
             &copy; {new Date().getFullYear()} Workdun. All rights reserved.{" "}
             <span className="text-muted-foreground">
               Powered by{" "}

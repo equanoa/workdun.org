@@ -438,13 +438,9 @@ export function Navbar() {
                 "bg-primary hover:bg-primary/80"
               )}
             >
-              <a
-                href="https://app.workdun.org"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Login
-              </a>
+              <Link to="/pricing">
+                Pricing
+              </Link>
             </Button>
           </div>
 
@@ -642,14 +638,12 @@ export function Navbar() {
                 asChild
                 className="mt-4 bg-primary hover:bg-primary/80 text-white"
               >
-                <a
-                  href="https://app.workdun.org"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  to="/pricing"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  Login
-                </a>
+                  Pricing
+                </Link>
               </Button>
             </div>
           </div>
