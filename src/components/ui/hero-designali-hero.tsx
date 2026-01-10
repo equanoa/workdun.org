@@ -110,17 +110,17 @@ export const HeroDesignAli = () => {
             to AI—we deliver measurable results.
           </p>
           <div className="flex items-center justify-center gap-2">
-            <Link to="/pricing">
+            <a href="https://app.workdun.org" target="_blank" rel="noopener noreferrer">
               <ShineBorder
                 borderWidth={3}
                 className="border cursor-pointer h-auto w-auto p-2 bg-white/5 backdrop-blur-md dark:bg-black/5"
                 color={["#3B82F6", "#2563EB", "#1E40AF"]}
               >
                 <Button className="w-full rounded-xl" >
-                  Pricing
+                  Login
                 </Button>
               </ShineBorder>
-            </Link> 
+            </a> 
             <Link to="/#contact">
               <Button className="rounded-xl" variant="outline">Schedule Call</Button>
             </Link>
