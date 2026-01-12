@@ -1,48 +1,10 @@
 "use client";
 
-import { useEffect } from "react";
 import { motion } from "motion/react";
 import { Button } from "@/components/ui/button";
 import { MessageCircle, Rocket, Calendar } from "lucide-react";
 
-// Declare Calendly type for TypeScript
-declare global {
-  interface Window {
-    Calendly?: {
-      initPopupWidget: (options: { url: string }) => void;
-    };
-  }
-}
-
 export function HomeStickyCTA() {
-  useEffect(() => {
-    // Load Calendly script if not already loaded
-    const loadCalendlyScript = () => {
-      let script = document.querySelector('script[src="https://assets.calendly.com/assets/external/widget.js"]') as HTMLScriptElement;
-      
-      if (!script) {
-        script = document.createElement('script');
-        script.src = 'https://assets.calendly.com/assets/external/widget.js';
-        script.async = true;
-        script.type = 'text/javascript';
-        document.body.appendChild(script);
-      }
-    };
-
-    loadCalendlyScript();
-  }, []);
-
-  const handleScheduleCall = (e: React.MouseEvent) => {
-    e.preventDefault();
-    if (window.Calendly) {
-      window.Calendly.initPopupWidget({
-        url: 'https://calendly.com/workdun/30min'
-      });
-    } else {
-      // Fallback: open in new tab if Calendly not loaded
-      window.open('https://calendly.com/workdun/30min', '_blank');
-    }
-  };
 
   return (
     <motion.div
@@ -64,12 +26,14 @@ export function HomeStickyCTA() {
         </div>
         <div className="flex gap-2 w-full sm:w-auto">
           <Button
-            onClick={handleScheduleCall}
+            asChild
             size="sm"
             className="bg-[#0069ff] hover:bg-[#0052cc] text-white text-xs md:text-sm font-bold px-4 md:px-6 py-2 h-auto rounded-lg flex items-center gap-2 flex-1 sm:flex-initial"
           >
-            <Calendar className="h-4 w-4" />
-            <span>Schedule Call with Us</span>
+            <a href="https://calendar.app.google/MnKP61hhzdhfXEFv6" target="_blank" rel="noopener noreferrer">
+              <Calendar className="h-4 w-4" />
+              <span>Schedule Call with Us</span>
+            </a>
           </Button>
           <Button
             asChild
