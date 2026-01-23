@@ -222,18 +222,7 @@ export function Footer() {
         <div className="flex flex-col md:flex-row justify-center items-center text-sm space-y-4 md:space-y-0">
           {/* Copyright */}
           <p className="text-center text-muted-foreground">
-            &copy; {new Date().getFullYear()} Workdun. All rights reserved.{" "}
-            <span className="text-muted-foreground">
-              Powered by{" "}
-              <a
-                href="https://nuemikos.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-primary hover:underline"
-              >
-                Nuemikos Solutions LLP
-              </a>
-            </span>
+            &copy; {new Date().getFullYear()} Workdun. All rights reserved.
           </p>
         </div>
       </div>
